@@ -7,6 +7,7 @@
     "start:backend": "nx serve backend",
     "build": "nx build",
     "test": "nx test",
+    "backend:test": "nx run backend:test",
     "docker": "docker-compose up -d --force-recreate",
     "db:dump": "node tools/scripts/dump-database.ts"
   },
