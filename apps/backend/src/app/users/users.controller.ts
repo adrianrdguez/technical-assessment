@@ -1,12 +1,29 @@
-import { Controller, Get, HttpStatus, Res, Query } from '@nestjs/common';
+import { Post, Body, Controller, Get, HttpStatus, Res, Query, HttpException } from '@nestjs/common';
 import { Response } from 'express';
 import { UsersService } from './users.service';
 import { ApiOperation } from '@nestjs/swagger';
 import { PageOptionsDto } from '../users-dto/page-options.dto';
+import { CreateNewUserDto } from '../users-dto/create-user.dto';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly userService: UsersService) { }
+
+  @Post()
+  @ApiOperation({ description: 'Create new user' })
+  async createUser(@Body() createUserDto: CreateNewUserDto): Promise<any> {
+    try {
+      const user = await this.userService.createUser(createUserDto);
+      return user;
+    } catch (error) {
+      console.error('Error creating user:', error);
+      if (error.message === 'User already exists.') {
+        throw new HttpException('User already exists.', HttpStatus.CONFLICT);
+      } else {
+        throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+    }
+  }
 
   @Get()
   @ApiOperation({ description: 'Get all users' })
