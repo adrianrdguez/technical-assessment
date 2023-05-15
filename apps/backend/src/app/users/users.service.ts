@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { MongoClient, MongoError } from 'mongodb';
+import { PageOptionsDto } from '../users-dto/page-options.dto';
 
 @Injectable()
 export class UsersService {
 
-  async getAllUsers(): Promise<any[]> {
+  async getAllUsers(pageOptions: PageOptionsDto): Promise<any[]> {
     const dbName = 'ucademy';
     const collectionName = 'users';
     const mongoUrl = 'mongodb://localhost:27017';
@@ -15,7 +16,9 @@ export class UsersService {
 
       const db = client.db(dbName);
       const collection = db.collection(collectionName);
-      const users = await collection.find().toArray();
+      let { page, limit } = pageOptions;
+
+      const users = await collection.find().skip(Number(page)).limit(Number(limit)).toArray();
 
       return users;
     } catch (error) {
