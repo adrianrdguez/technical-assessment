@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTable } from 'react-table';
-import { CustomThead, ContainerDiv, CustomTable } from '../../styles/UsersTable.styles';
+import { CustomThead, ContainerDiv, CustomTable, Td, Th } from '../../styles/UsersTable.styles';
 
 interface TableData {
   name: string;
@@ -69,7 +69,7 @@ const UsersTable = () => {
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                <Th {...column.getHeaderProps()}>{column.render('Header')}</Th>
               ))}
             </tr>
           ))}
@@ -80,7 +80,7 @@ const UsersTable = () => {
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                  <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
                 ))}
               </tr>
             );

@@ -11,3 +11,11 @@ overflow-x: auto;
 export const CustomTable = styled.table`
   width: 100%;
 `;
+
+export const Th = styled.th`
+  padding: 10px;
+`;
+
+export const Td = styled.th`
+  padding: 15px 10px;
+`;

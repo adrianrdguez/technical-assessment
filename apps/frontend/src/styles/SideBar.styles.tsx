@@ -24,5 +24,14 @@ export const CustomDiv = styled.div`
 export const DivContainer = styled.div`
 @media (min-width:${deviceSizes.laptop}) {
   display: flex;
+  align-items: top;
 }
+`;
+
+export const TableContent = styled.div`
+  margin: 40px;
+  @media (min-width:${deviceSizes.laptop}) {
+    width: 100%;
+    max-width: 1080px;
+  }
 `;

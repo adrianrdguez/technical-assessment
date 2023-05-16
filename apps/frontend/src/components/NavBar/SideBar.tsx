@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { CustomLi, CustomImg, CustomDiv, DivContainer } from '../../styles/SideBar.styles';
+import { CustomLi, CustomImg, CustomDiv, DivContainer, TableContent } from '../../styles/SideBar.styles';
 
 interface SidebarProps {
   children: ReactNode;
@@ -22,7 +22,9 @@ const Sidebar = ({ children, items }: SidebarProps) => {
           )}
         </ul>
       </CustomDiv>
-      {children}
+      <TableContent>
+        {children}
+      </TableContent>
     </DivContainer>
   );
 };
