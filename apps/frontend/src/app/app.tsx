@@ -1,6 +1,6 @@
 import Navbar from '../components/NavBar/NavBar';
 import AppRouter from '../router';
-import Sidebar from '../components/NavBar/SideBar';
+import Sidebar from '../components/SideBar/SideBar';
 import { SIDE_CONSTANTS } from '../styles/constants';
 import '../styles/index.css'
 
