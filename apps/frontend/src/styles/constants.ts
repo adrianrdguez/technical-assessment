@@ -1,6 +1,6 @@
 import SIDEBAR_LOGO from '../assets/sidebar-logo.svg'
 
-export const SIDE_CONSTANS = [{
+export const SIDE_CONSTANTS = [{
   logo: SIDEBAR_LOGO,
   text: "Dashboard"
 }];

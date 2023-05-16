@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
+import { CustomLi, CustomImg } from '../../styles/SideBar.styles';
 
 interface SidebarProps {
   children: ReactNode;
@@ -13,10 +14,10 @@ const Sidebar = ({ children, items }: SidebarProps) => {
     <div className="sidebar">
       <ul>
         {items.map(({ logo, text }) =>
-          <li key={text}>
-            <img src={logo} alt={text} />
+          <CustomLi key={text}>
+            <CustomImg src={logo} alt={text} />
             {text}
-          </li>
+          </CustomLi>
         )}
       </ul>
       {children}

@@ -1,63 +1,93 @@
 import React from 'react';
-import { useTable, Column } from 'react-table';
+import { useTable } from 'react-table';
+import { CustomThead, ContainerDiv, CustomTable } from '../../styles/UsersTable.styles';
 
 interface TableData {
-  id: number;
   name: string;
-  age: number;
+  isOnline: boolean;
+  email: string;
+  phone: string;
+  username: string;
+  icon: string;
+}
+interface CustomColumn {
+  Header: string;
+  accessor: keyof TableData;
 }
 
 const UsersTable = () => {
-  // Sample data
   const data: TableData[] = React.useMemo(
     () => [
-      { id: 1, name: 'John', age: 25 },
-      { id: 2, name: 'Jane', age: 30 },
-      { id: 3, name: 'Bob', age: 35 },
+      {
+        name: 'John Doe',
+        isOnline: true,
+        email: 'john.doe@example.com',
+        phone: '555-1234',
+        username: 'johndoe',
+        icon: 'https://example.com/johndoe.jpg',
+      },
+      {
+        name: 'Jane Smith',
+        isOnline: false,
+        email: 'jane.smith@example.com',
+        phone: '555-5678',
+        username: 'janesmith',
+        icon: 'https://example.com/janesmith.jpg',
+      },
+      {
+        name: 'Bob Johnson',
+        isOnline: true,
+        email: 'bob.johnson@example.com',
+        phone: '555-4321',
+        username: 'bobjohnson',
+        icon: 'https://example.com/bobjohnson.jpg',
+      },
     ],
     []
   );
 
-  // Column definitions
-  const columns: Column<TableData>[] = React.useMemo(
+  const columns: CustomColumn[] = React.useMemo(
     () => [
-      { Header: 'ID', accessor: 'id' },
-      { Header: 'Name', accessor: 'name' },
-      { Header: 'Age', accessor: 'age' },
+      { Header: 'Conexión', accessor: 'isOnline' },
+      { Header: 'Nombre y Apellidos', accessor: 'name' },
+      { Header: 'Nombre de Usuario', accessor: 'username' },
+      { Header: 'Email', accessor: 'email' },
+      { Header: 'Móvil', accessor: 'phone' },
     ],
     []
   );
 
-  // Use the useTable hook to create table instance
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({
     columns,
     data,
   });
 
   return (
-    <table {...getTableProps()}>
-      <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => (
-                <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+    <ContainerDiv>
+      <CustomTable {...getTableProps()}>
+        <CustomThead>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
               ))}
             </tr>
-          );
-        })}
-      </tbody>
-    </table>
+          ))}
+        </CustomThead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => (
+                  <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
+      </CustomTable>
+    </ContainerDiv>
   );
 };
 
