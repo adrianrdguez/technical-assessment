@@ -1,6 +1,6 @@
-import Navbar from '../components/NavBar';
+import Navbar from '../components/NavBar/NavBar';
 import AppRouter from '../router';
-import Sidebar from '../components/SideBar';
+import Sidebar from '../components/NavBar/SideBar';
 import '../styles/index.css'
 
 export function App() {

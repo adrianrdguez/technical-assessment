@@ -8,9 +8,6 @@ const Sidebar = ({ children }: SidebarProps) => {
   return (
     <div className="sidebar">
       <ul>
-        <li>Home</li>
-        <li>About</li>
-        <li>Contact</li>
       </ul>
       {children}
     </div>
