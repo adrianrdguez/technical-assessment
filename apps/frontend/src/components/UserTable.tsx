@@ -7,7 +7,7 @@ interface TableData {
   age: number;
 }
 
-const Table = () => {
+const UsersTable = () => {
   // Sample data
   const data: TableData[] = React.useMemo(
     () => [
@@ -61,4 +61,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default UsersTable;

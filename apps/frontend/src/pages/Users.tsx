@@ -1,8 +1,9 @@
-import Table from '../components/UserTable';
+import UsersTable from '../components/UserTable';
 
 const Users = () => (
   <>
-    <Table />
+    <button onClick={() => console.log('Button clicked!')}>Nuevo Estudiante</button>
+    <UsersTable />
   </>
 )
 
