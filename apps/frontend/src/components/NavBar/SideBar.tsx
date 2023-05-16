@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { CustomLi, CustomImg } from '../../styles/SideBar.styles';
+import { CustomLi, CustomImg, CustomDiv, DivContainer } from '../../styles/SideBar.styles';
 
 interface SidebarProps {
   children: ReactNode;
@@ -11,17 +11,19 @@ interface SidebarProps {
 
 const Sidebar = ({ children, items }: SidebarProps) => {
   return (
-    <div className="sidebar">
-      <ul>
-        {items.map(({ logo, text }) =>
-          <CustomLi key={text}>
-            <CustomImg src={logo} alt={text} />
-            {text}
-          </CustomLi>
-        )}
-      </ul>
+    <DivContainer>
+      <CustomDiv>
+        <ul>
+          {items.map(({ logo, text }) =>
+            <CustomLi key={text}>
+              <CustomImg src={logo} alt={text} />
+              {text}
+            </CustomLi>
+          )}
+        </ul>
+      </CustomDiv>
       {children}
-    </div>
+    </DivContainer>
   );
 };
 

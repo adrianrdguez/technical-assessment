@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { deviceSizes } from "./constants";
 
 export const CustomLi = styled.li`
   display: flex;
@@ -8,4 +9,20 @@ export const CustomLi = styled.li`
 
 export const CustomImg = styled.img`
   margin: 20px;
+`;
+
+export const CustomDiv = styled.div`
+  position: fixed;
+  padding: 20px;
+  @media (min-width:${deviceSizes.laptop}) {
+    position: relative;
+    padding-top: 35px;
+    padding: 20px;
+  }
+`;
+
+export const DivContainer = styled.div`
+@media (min-width:${deviceSizes.laptop}) {
+  display: flex;
+}
 `;
