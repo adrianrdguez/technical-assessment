@@ -1,6 +1,9 @@
-import React from 'react';
+import Table from '../components/UserTable';
 
-const Users = () =>
-  <div>Page for the Users</div>
+const Users = () => (
+  <>
+    <Table />
+  </>
+)
 
 export default Users;
