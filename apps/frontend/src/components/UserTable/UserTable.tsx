@@ -15,7 +15,11 @@ interface CustomColumn {
   accessor: keyof TableData;
 }
 
-const UsersTable = () => {
+interface UsersTableProps {
+  onInfoClick: (rowData: TableData) => void;
+}
+
+const UsersTable: React.FC<UsersTableProps> = ({ onInfoClick }) => {
   const data: TableData[] = React.useMemo(
     () => [
       {
@@ -77,11 +81,15 @@ const UsersTable = () => {
         <tbody {...getTableBodyProps()}>
           {rows.map((row) => {
             prepareRow(row);
+            const rowData = row.original as TableData;
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => (
                   <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
                 ))}
+                <Td>
+                  <button onClick={() => onInfoClick(rowData)}>Info</button>
+                </Td>
               </tr>
             );
           })}
