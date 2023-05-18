@@ -24,7 +24,6 @@ export const CustomDiv = styled.div`
 export const DivContainer = styled.div`
 display: flex;
 flex-direction: row;
-height: 100vw;
 @media (min-width:${deviceSizes.laptop}) {
   display: flex;
   align-items: top;

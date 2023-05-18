@@ -1,18 +1,28 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const UserProfileTabsContainer = styled.div`
   display: flex;
   flex-direction: column-reverse;
 `;
 
-export const UserProfileTabButton = styled.button`
-  background-color: #f0f0f0;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-weight: bold;
-  border-radius: 5px 5px 0 0;
+interface UserProfileTabButtonProps {
+  isActive: boolean;
+}
+
+export const UserProfileTabButton = styled.button<UserProfileTabButtonProps>`
+background: transparent;
+border: none;
+font-size: 13px;
+margin-right: 5px;
+cursor: pointer;
+${(props) =>
+    props.isActive &&
+    css`
+    border-bottom: 6px solid #0ABB87;
+  `}
 `;
+
+
 
 export const UserProfileTabContent = styled.div`
   background-color: #ffffff;

@@ -39,7 +39,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, user }) => {
         <CloseButton
           onClick={onClose}
         >
-          Close
+          Cerrar
         </CloseButton>
       </ModalContent>
     </ModalOverlay>

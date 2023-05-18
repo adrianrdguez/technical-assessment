@@ -29,6 +29,7 @@ const UserProfileTabs = ({ defaultTab, children }: { defaultTab: string; childre
             key={child.props.label}
             onClick={() => handleTabClick(child.props.label)}
             style={{ fontWeight: activeTab === child.props.label ? 'bold' : 'normal' }}
+            isActive={activeTab === child.props.label}
           >
             {child.props.label}
           </UserProfileTabButton>

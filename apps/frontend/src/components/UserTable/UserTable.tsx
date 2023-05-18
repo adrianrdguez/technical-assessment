@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTable } from 'react-table';
 import axios from 'axios';
 import { CustomThead, ContainerDiv, CustomTable, Td, Th, PaginationContainer, PaginationButton } from './UsersTable.styles';
+import { ReactComponent as InfoIcon } from '../../assets/info.svg'
 
 interface TableData {
   name: string;
@@ -84,7 +85,7 @@ const UsersTable: React.FC<UsersTableProps> = ({ onInfoClick }) => {
                   <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
                 ))}
                 <Td>
-                  <button onClick={() => onInfoClick(rowData)}>Info</button>
+                  <InfoIcon style={{ cursor: 'pointer' }} onClick={() => onInfoClick(rowData)} />
                 </Td>
               </tr>
             );
