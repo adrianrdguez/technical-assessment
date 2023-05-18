@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { deviceSizes } from "./constants";
+import { deviceSizes } from "../../styles/constants";
 
 export const CustomLi = styled.li`
   display: flex;

@@ -1,4 +1,4 @@
-import { ContainerDiv, Icon, ContentDiv, Header, Text, ImageDivContainer } from '../../styles/UserProfile.styles';
+import { ContainerDiv, Icon, ContentDiv, Header, Text, ImageDivContainer } from './UserProfile.styles';
 
 interface UserProps {
   avatar: string;

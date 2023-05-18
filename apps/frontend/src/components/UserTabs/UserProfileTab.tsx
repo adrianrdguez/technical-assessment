@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { UserProfileTabContent } from '../../styles/UserProfileTabs.styles';
+import { UserProfileTabContent } from './UserProfileTabs.styles';
 
 interface UserProfileTabProps {
   label: string;

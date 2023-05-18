@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTable } from 'react-table';
-import { CustomThead, ContainerDiv, CustomTable, Td, Th } from '../../styles/UsersTable.styles';
+import { CustomThead, ContainerDiv, CustomTable, Td, Th } from './UsersTable.styles';
 
 interface TableData {
   name: string;

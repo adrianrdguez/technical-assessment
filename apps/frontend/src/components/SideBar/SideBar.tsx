@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { CustomLi, CustomImg, CustomDiv, DivContainer, TableContent } from '../../styles/SideBar.styles';
+import { CustomLi, CustomImg, CustomDiv, DivContainer, TableContent } from './SideBar.styles';
 
 interface SidebarProps {
   children: ReactNode;
