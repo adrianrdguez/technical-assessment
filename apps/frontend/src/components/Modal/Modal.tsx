@@ -1,8 +1,8 @@
 import React from 'react';
 import { ModalContent, ModalOverlay } from './Modal.styles';
 import UserProfile from '../UserProfile/UserProfile';
-import UserProfileTabs from '../UserTabs/UserProfileTabs';
-import UserProfileTab from '../UserTabs/UserProfileTab';
+import UserProfileTabs from '../UserProfileTabs/UserProfileTabs';
+import UserProfileTab from '../UserProfileTabs/UserProfileTab';
 import CloseButton from '../Buttons/CloseButton';
 import UserCourses from '../UserCourses/UserCourses';
 
