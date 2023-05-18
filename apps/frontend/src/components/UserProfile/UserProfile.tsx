@@ -1,4 +1,4 @@
-import { ContainerDiv, Icon, ContentDiv, Header, Text, ImageDivContainer } from '../../styles/UserModal.styles';
+import { ContainerDiv, Icon, ContentDiv, Header, Text, ImageDivContainer } from '../../styles/UserProfile.styles';
 
 interface UserProps {
   avatar: string;
@@ -10,7 +10,7 @@ interface UserProps {
   icon?: '';
 }
 
-const UserModal: React.FC<UserProps> = (props) => (
+const UserProfile: React.FC<UserProps> = (props) => (
   <div>
     <ImageDivContainer>
       <img src={props.avatar} alt={props.name} />
@@ -63,4 +63,4 @@ const UserModal: React.FC<UserProps> = (props) => (
   </div>
 );
 
-export default UserModal;
+export default UserProfile;

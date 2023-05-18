@@ -22,6 +22,9 @@ export const CustomDiv = styled.div`
 `;
 
 export const DivContainer = styled.div`
+display: flex;
+flex-direction: row;
+height: 100vw;
 @media (min-width:${deviceSizes.laptop}) {
   display: flex;
   align-items: top;
@@ -30,6 +33,8 @@ export const DivContainer = styled.div`
 
 export const TableContent = styled.div`
   margin: 40px;
+  flex-grow: 1; 
+  overflow-y: auto;
   @media (min-width:${deviceSizes.laptop}) {
     width: 100%;
     max-width: 1080px;

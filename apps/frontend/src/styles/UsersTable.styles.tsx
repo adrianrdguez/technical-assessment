@@ -6,6 +6,7 @@ export const CustomThead = styled.thead`
 
 export const ContainerDiv = styled.div`
 overflow-x: auto;
+width: 100%;
 `;
 
 export const CustomTable = styled.table`

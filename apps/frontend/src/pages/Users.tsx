@@ -22,7 +22,7 @@ const Users = () => {
   return (<>
     <Button>Nuevo Estudiante</Button>
     <UsersTable onInfoClick={handleInfoClick} />
-    <Modal user={selectedUser} isOpen={isModalOpen} onClose={closeModal} children />
+    <Modal user={selectedUser} isOpen={isModalOpen} onClose={closeModal} />
   </>);
 }
 
