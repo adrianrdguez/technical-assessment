@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UserProfileTabsContainer, UserProfileTabButton } from './UserProfileTabs.styles';
+import { UserProfileTabsContainer, UserProfileTabButton, EditTabButton } from './UserProfileTabs.styles';
 
 interface TabProps {
   label: string;

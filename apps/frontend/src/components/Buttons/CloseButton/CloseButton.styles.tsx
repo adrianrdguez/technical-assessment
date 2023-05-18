@@ -18,3 +18,10 @@ export const ButtonContainer = styled.button`
     background-color: #0056b3;
   }
 `;
+
+export const EditButtonContainer = styled.div`
+display:flex;
+position:absolute;
+right:20px;
+top:20px;
+`;

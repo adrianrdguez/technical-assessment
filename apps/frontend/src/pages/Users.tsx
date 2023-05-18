@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import UsersTable from '../components/UserTable/UserTable';
-import Button from '../components/Buttons/Button';
+import Button from '../components/Buttons/AddStudentButton/Button';
 import Modal from '../components/Modal/Modal';
 
 const Users = () => {

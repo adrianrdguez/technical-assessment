@@ -22,10 +22,16 @@ ${(props) =>
   `}
 `;
 
-
-
 export const UserProfileTabContent = styled.div`
   background-color: #ffffff;
   padding: 20px;
   border-radius: 0 0 5px 5px;
 `;
+
+export const EditTabButton = styled.button`
+background-color: #262D34;
+        color: #FFF;
+        &:hover {
+          background-color: #3f4a56;
+        }
+`

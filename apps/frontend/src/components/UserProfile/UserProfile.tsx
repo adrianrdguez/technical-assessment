@@ -1,7 +1,7 @@
 import { ContainerDiv, Icon, ContentDiv, Header, Text, ImageDivContainer } from './UserProfile.styles';
 
 interface UserProps {
-  avatar: string;
+  avatar?: string;
   name: string;
   username: string;
   email: string;

@@ -92,7 +92,6 @@ const UsersTable: React.FC<UsersTableProps> = ({ onInfoClick }) => {
           })}
         </tbody>
       </CustomTable>
-
       <PaginationContainer>
         <PaginationButton disabled={currentPage === 0} onClick={handlePrevPage}>
           Previous
