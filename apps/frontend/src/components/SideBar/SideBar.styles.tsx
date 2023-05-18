@@ -37,6 +37,5 @@ export const TableContent = styled.div`
   overflow-y: auto;
   @media (min-width:${deviceSizes.laptop}) {
     width: 100%;
-    max-width: 1080px;
   }
 `;

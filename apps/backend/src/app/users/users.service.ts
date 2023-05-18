@@ -20,7 +20,7 @@ export class UsersService {
       let { page, limit } = pageOptions;
 
       const users = await collection.find().skip(Number(page)).limit(Number(limit)).toArray();
-      console.log(users)
+
       return users;
     } catch (error) {
       if (error instanceof MongoError) {

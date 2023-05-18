@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTable } from 'react-table';
-import { CustomThead, ContainerDiv, CustomTable, Td, Th } from './UsersTable.styles';
+import axios from 'axios';
+import { CustomThead, ContainerDiv, CustomTable, Td, Th, PaginationContainer, PaginationButton } from './UsersTable.styles';
 
 interface TableData {
   name: string;
@@ -10,6 +11,7 @@ interface TableData {
   username: string;
   icon: string;
 }
+
 interface CustomColumn {
   Header: string;
   accessor: keyof TableData;
@@ -20,35 +22,21 @@ interface UsersTableProps {
 }
 
 const UsersTable: React.FC<UsersTableProps> = ({ onInfoClick }) => {
-  const data: TableData[] = React.useMemo(
-    () => [
-      {
-        name: 'John Doe',
-        isOnline: true,
-        email: 'john.doe@example.com',
-        phone: '555-1234',
-        username: 'johndoe',
-        icon: 'https://example.com/johndoe.jpg',
-      },
-      {
-        name: 'Jane Smith',
-        isOnline: false,
-        email: 'jane.smith@example.com',
-        phone: '555-5678',
-        username: 'janesmith',
-        icon: 'https://example.com/janesmith.jpg',
-      },
-      {
-        name: 'Bob Johnson',
-        isOnline: true,
-        email: 'bob.johnson@example.com',
-        phone: '555-4321',
-        username: 'bobjohnson',
-        icon: 'https://example.com/bobjohnson.jpg',
-      },
-    ],
-    []
-  );
+  const [data, setData] = useState<TableData[]>([]);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  useEffect(() => {
+    fetchUsers(currentPage);
+  }, [currentPage]);
+
+  const fetchUsers = async (page: number) => {
+    try {
+      const response = await axios.get<TableData[]>(`http://localhost:3333/api/users?page=${page}&limit=10`);
+      setData(response.data);
+    } catch (error) {
+      console.log('Error fetching users:', error);
+    }
+  };
 
   const columns: CustomColumn[] = React.useMemo(
     () => [
@@ -65,6 +53,14 @@ const UsersTable: React.FC<UsersTableProps> = ({ onInfoClick }) => {
     columns,
     data,
   });
+
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 10, 0));
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 10);
+  };
 
   return (
     <ContainerDiv>
@@ -95,6 +91,15 @@ const UsersTable: React.FC<UsersTableProps> = ({ onInfoClick }) => {
           })}
         </tbody>
       </CustomTable>
+
+      <PaginationContainer>
+        <PaginationButton disabled={currentPage === 0} onClick={handlePrevPage}>
+          Previous
+        </PaginationButton>
+        <PaginationButton onClick={handleNextPage}>
+          Next
+        </PaginationButton>
+      </PaginationContainer>
     </ContainerDiv>
   );
 };
