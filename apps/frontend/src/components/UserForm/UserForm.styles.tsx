@@ -1,16 +1,13 @@
 import styled, { css } from 'styled-components';
 import { Field, ErrorMessage } from 'formik';
 
-
 interface FormGroupProps {
   width?: number;
 }
 
-
 export const FormContainer = styled.div`
   margin-top: 20px;
 `;
-
 
 export const Label = styled.label`
 font-style: normal;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import { FormContainer, FormGroup, Label, Input, ErrorMsg, DoubleRow } from './EditUserForm.styles';
+import { FormContainer, FormGroup, Label, Input, ErrorMsg, DoubleRow } from './UserForm.styles';
 
 
 interface UserFormProps {
@@ -42,7 +42,6 @@ const EditUserForm: React.FC<UserFormProps> = ({ initialValues, onSubmit }) => {
       <Form>
         <FormContainer>
           <DoubleRow>
-
             <FormGroup width={40}>
               <Label htmlFor="name">Nombre</Label>
               <Input type="text" id="name" name="name" />

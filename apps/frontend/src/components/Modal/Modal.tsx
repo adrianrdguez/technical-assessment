@@ -7,7 +7,7 @@ import CloseButton from '../Buttons/CloseButton/CloseButton';
 import UserCourses from '../UserCourses/UserCourses';
 import EditButton from '../Buttons/EditButton/EditButton';
 import { EditButtonContainer } from '../Buttons/CloseButton/CloseButton.styles';
-import EditUserForm from '../EditUserForm/EditUserForm';
+import UserForm from '../UserForm/UserForm';
 import SaveButton from '../Buttons/SaveButton/SaveButton';
 import CancelButton from '../Buttons/CancelButton/CancelButton';
 
@@ -15,9 +15,10 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   user?: any;
+  isButtonClicked?: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, user }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, user, isButtonClicked }) => {
   if (!isOpen) return null;
 
   const [isEditing, setIsEditing] = useState(false);
@@ -44,28 +45,32 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, user }) => {
   return (
     <ModalOverlay>
       <ModalContent>
-        <UserProfileTabs defaultTab="Perfil">
-          <UserProfileTab label="Perfil">
-            <EditButtonContainer>
-              {!isEditing ? (
-                <EditButton onClick={handleEditClick} />
+        {isButtonClicked ? (
+          <UserForm onSubmit={handleFormSubmit} initialValues={userProfileProps} />
+        ) :
+          <UserProfileTabs defaultTab="Perfil">
+            <UserProfileTab label="Perfil">
+              <EditButtonContainer>
+                {!isEditing ? (
+                  <EditButton onClick={handleEditClick} />
+                ) : (
+                  <>
+                    <CancelButton onClick={handleEditClick} />
+                    <SaveButton onClick={handleEditClick} />
+                  </>
+                )}
+              </EditButtonContainer>
+              {isEditing ? (
+                <UserForm onSubmit={handleFormSubmit} initialValues={userProfileProps} />
               ) : (
-                <>
-                  <CancelButton onClick={handleEditClick} />
-                  <SaveButton onClick={handleEditClick} />
-                </>
+                <UserProfile {...userProfileProps} />
               )}
-            </EditButtonContainer>
-            {isEditing ? (
-              <EditUserForm onSubmit={handleFormSubmit} initialValues={userProfileProps} />
-            ) : (
-              <UserProfile {...userProfileProps} />
-            )}
-          </UserProfileTab>
-          <UserProfileTab label="Cursos">
-            <UserCourses courses={userProfileProps.courses} />
-          </UserProfileTab>
-        </UserProfileTabs>
+            </UserProfileTab>
+            <UserProfileTab label="Cursos">
+              <UserCourses courses={userProfileProps.courses} />
+            </UserProfileTab>
+          </UserProfileTabs>
+        }
         <CloseButton onClick={onClose}>Cerrar</CloseButton>
       </ModalContent>
     </ModalOverlay>
