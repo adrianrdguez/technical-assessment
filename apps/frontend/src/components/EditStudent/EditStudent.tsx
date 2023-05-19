@@ -1,68 +1,70 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React from 'react';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 
-const FormContainer = styled.div`
-  margin-top: 1rem;
-`;
+interface UserFormProps {
+  initialValues: {
+    name: string;
+    username: string;
+    email: string;
+    phone: string;
+  };
+  onSubmit: (values: any) => void;
+}
 
-const FormField = styled.div`
-  margin-bottom: 0.5rem;
-`;
+const EditUserForm: React.FC<UserFormProps> = ({ initialValues, onSubmit }) => {
+  const validateForm = (values: any) => {
+    const errors: any = {};
 
-const Label = styled.label`
-  display: block;
-  margin-bottom: 0.25rem;
-`;
+    if (!values.name) {
+      errors.name = 'Required';
+    }
 
-const Input = styled.input`
-  width: 100%;
-  padding: 0.5rem;
-`;
+    if (!values.username) {
+      errors.username = 'Required';
+    }
 
-const Button = styled.button`
-  padding: 0.5rem 1rem;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-`;
+    if (!values.email) {
+      errors.email = 'Required';
+    }
 
-const EditStudentForm: React.FC<{ onSubmit: (formData: any) => void }> = ({ onSubmit }) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+    if (!values.phone) {
+      errors.phone = 'Required';
+    }
 
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const formData = {
-      name,
-      email,
-      phone,
-    };
-
-    onSubmit(formData);
+    return errors;
   };
 
   return (
-    <FormContainer>
-      <form onSubmit={handleFormSubmit}>
-        <FormField>
-          <Label>Name:</Label>
-          <Input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-        </FormField>
-        <FormField>
-          <Label>Email:</Label>
-          <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </FormField>
-        <FormField>
-          <Label>Phone:</Label>
-          <Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
-        </FormField>
-        <Button type="submit">Save Changes</Button>
-      </form>
-    </FormContainer>
+    <Formik initialValues={initialValues} validate={validateForm} onSubmit={onSubmit}>
+      <Form>
+        <div>
+          <label htmlFor="name">Name</label>
+          <Field type="text" id="name" name="name" />
+          <ErrorMessage name="name" component="div" />
+        </div>
+
+        <div>
+          <label htmlFor="username">Username</label>
+          <Field type="text" id="username" name="username" />
+          <ErrorMessage name="username" component="div" />
+        </div>
+
+        <div>
+          <label htmlFor="email">Email</label>
+          <Field type="email" id="email" name="email" />
+          <ErrorMessage name="email" component="div" />
+        </div>
+
+        <div>
+          <label htmlFor="phone">Phone</label>
+          <Field type="text" id="phone" name="phone" />
+          <ErrorMessage name="phone" component="div" />
+        </div>
+
+        <button type="submit">Submit</button>
+      </Form>
+    </Formik>
   );
 };
 
-export default EditStudentForm;
+export default EditUserForm;

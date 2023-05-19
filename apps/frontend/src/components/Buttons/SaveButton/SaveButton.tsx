@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface EditButtonProps {
+interface SaveButtonProps {
   onClick: () => void;
 }
 
@@ -14,12 +14,12 @@ const StyledButton = styled.button`
   cursor: pointer;
 `;
 
-const EditButton: React.FC<EditButtonProps> = ({ onClick }) => {
+const SaveButton: React.FC<SaveButtonProps> = ({ onClick }) => {
   return (
     <StyledButton onClick={onClick}>
-      Editar Estudiante
+      Cuardar
     </StyledButton>
   );
 };
 
-export default EditButton;
+export default SaveButton;

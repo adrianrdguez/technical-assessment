@@ -7,6 +7,9 @@ import CloseButton from '../Buttons/CloseButton/CloseButton';
 import UserCourses from '../UserCourses/UserCourses';
 import EditButton from '../Buttons/EditButton/EditButton';
 import { EditButtonContainer } from '../Buttons/CloseButton/CloseButton.styles';
+import EditUserForm from '../EditStudent/EditStudent';
+import SaveButton from '../Buttons/SaveButton/SaveButton';
+import CancelButton from '../Buttons/CancelButton/CancelButton';
 
 interface ModalProps {
   isOpen: boolean;
@@ -30,7 +33,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, user }) => {
   };
 
   const handleEditClick = () => {
-    setIsEditing(true);
+    setIsEditing(!isEditing);
   };
 
   const handleFormSubmit = (formData: any) => {
@@ -43,9 +46,20 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, user }) => {
         <UserProfileTabs defaultTab="Perfil">
           <UserProfileTab label="Perfil">
             <EditButtonContainer>
-              <EditButton onClick={handleEditClick} />
+              {!isEditing ? (
+                <EditButton onClick={handleEditClick} />
+              ) : (
+                <>
+                  <CancelButton onClick={handleEditClick} />
+                  <SaveButton onClick={handleEditClick} />
+                </>
+              )}
             </EditButtonContainer>
-            <UserProfile {...userProfileProps} />
+            {isEditing ? (
+              <EditUserForm onSubmit={handleFormSubmit} initialValues={userProfileProps} />
+            ) : (
+              <UserProfile {...userProfileProps} />
+            )}
           </UserProfileTab>
           <UserProfileTab label="Cursos">
             <UserCourses courses={userProfileProps.courses} />
