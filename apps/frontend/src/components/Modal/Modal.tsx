@@ -7,7 +7,7 @@ import CloseButton from '../Buttons/CloseButton/CloseButton';
 import UserCourses from '../UserCourses/UserCourses';
 import EditButton from '../Buttons/EditButton/EditButton';
 import { EditButtonContainer } from '../Buttons/CloseButton/CloseButton.styles';
-import EditUserForm from '../EditStudent/EditStudent';
+import EditUserForm from '../EditUserForm/EditUserForm';
 import SaveButton from '../Buttons/SaveButton/SaveButton';
 import CancelButton from '../Buttons/CancelButton/CancelButton';
 
@@ -25,6 +25,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, user }) => {
   const userProfileProps = user && {
     avatar: user.avatar,
     name: user.name,
+    lastName: user.lastName,
     username: user.username,
     email: user.email,
     phone: user.phone,

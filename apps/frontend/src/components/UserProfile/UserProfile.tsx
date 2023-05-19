@@ -3,6 +3,7 @@ import { ContainerDiv, Icon, ContentDiv, Header, Text, ImageDivContainer } from 
 interface UserProps {
   avatar?: string;
   name: string;
+  lastName: string;
   username: string;
   email: string;
   phone: string;
@@ -21,7 +22,7 @@ const UserProfile: React.FC<UserProps> = (props) => (
       </Icon>
       <ContentDiv>
         <Header>Nombre y Apellidos</Header>
-        <Text>{props.name}</Text>
+        <Text>{props.name} {props.lastName}</Text>
       </ContentDiv>
     </ContainerDiv>
     <ContainerDiv>

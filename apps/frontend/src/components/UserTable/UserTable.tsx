@@ -6,12 +6,15 @@ import { ReactComponent as InfoIcon } from '../../assets/info.svg'
 
 interface TableData {
   name: string;
+  lastName: string;
   isOnline: boolean;
   email: string;
   phone: string;
   username: string;
   icon: string;
+  fullName: string;
 }
+
 
 interface CustomColumn {
   Header: string;
@@ -33,16 +36,24 @@ const UsersTable: React.FC<UsersTableProps> = ({ onInfoClick }) => {
   const fetchUsers = async (page: number) => {
     try {
       const response = await axios.get<TableData[]>(`http://localhost:3333/api/users?page=${page}&limit=10`);
-      setData(response.data);
+      const updatedData = response.data.map((user) => ({
+        ...user,
+        fullName: `${user.name} ${user.lastName}`,
+      }));
+      setData(updatedData);
     } catch (error) {
       console.log('Error fetching users:', error);
     }
   };
 
+
   const columns: CustomColumn[] = React.useMemo(
     () => [
       { Header: 'Conexión', accessor: 'isOnline' },
-      { Header: 'Nombre y Apellidos', accessor: 'name' },
+      {
+        Header: 'Nombre y Apellidos',
+        accessor: 'fullName',
+      },
       { Header: 'Nombre de Usuario', accessor: 'username' },
       { Header: 'Email', accessor: 'email' },
       { Header: 'Móvil', accessor: 'phone' },
