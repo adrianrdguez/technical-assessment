@@ -71,5 +71,14 @@ export class UsersService {
     }
   }
 
+  async updateUser(id: string, updateUserDto: Partial<User>): Promise<User | null> {
+    try {
+      const updatedUser = await this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true });
+      return updatedUser;
+    } catch (error) {
+      console.error('Error updating user:', error);
+      throw new Error('Failed to update user in the database.');
+    }
+  }
 }
 
