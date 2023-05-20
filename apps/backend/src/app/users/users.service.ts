@@ -1,10 +1,15 @@
+import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
-import { MongoClient, MongoError, InsertOneResult } from 'mongodb';
+import { InjectModel } from '@nestjs/mongoose';
+import { MongoClient, MongoError } from 'mongodb';
 import { PageOptionsDto } from '../users-dto/page-options.dto';
 import { CreateNewUserDto } from '../users-dto/create-user.dto';
+import { User } from './user.schema';
 
 @Injectable()
 export class UsersService {
+  constructor(@InjectModel(User.name) private readonly userModel: Model<User>) { }
+
   private dbName = 'ucademy';
   private collectionName = 'users';
   private mongoUrl = 'mongodb://localhost:27017';
@@ -17,9 +22,15 @@ export class UsersService {
 
       const db = client.db(this.dbName);
       const collection = db.collection(this.collectionName);
+
       let { page, limit } = pageOptions;
 
-      const users = await collection.find().skip(Number(page)).limit(Number(limit)).toArray();
+      const users = await collection
+        .find()
+        .skip(Number(page))
+        .limit(Number(limit))
+        .sort({ inscriptionDate: -1 })
+        .toArray();
 
       return users;
     } catch (error) {
@@ -35,46 +46,30 @@ export class UsersService {
     }
   }
 
-
-  async createUser(createUserDto: CreateNewUserDto): Promise<any> {
-    const client = new MongoClient(this.mongoUrl);
-
+  async createUser(createUserDto: CreateNewUserDto): Promise<User> {
     try {
-      await client.connect();
+      const createdUser = new this.userModel({
+        ...createUserDto,
+        isOnline: false,
+        inscriptionDate: new Date().toISOString(),
+        avatar: 'https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/26/2621da26f5c7e9163a60f0a9d1129f5e53984663.jpg',
+        courses: [],
+      });
 
-      const db = client.db(this.dbName);
-      const collection = db.collection(this.collectionName);
-
-      const { _id, ...userObject } = createUserDto;
-
-      try {
-        const result: InsertOneResult<any> = await collection.insertOne(userObject);
-        const insertedId = result.insertedId;
-
-        return {
-          _id: insertedId,
-          ...userObject,
-        };
-      } catch (error) {
-        if (error.code === 11000) {
-          // Duplicate key error
-          console.error('Duplicate user data:', error);
-          throw new Error('User already exists.');
-        }
-
-        console.error('Error creating user:', error);
-        throw new Error('Failed to create user in the database.');
-      }
+      const savedUser = await createdUser.save();
+      return savedUser;
     } catch (error) {
-      if (error instanceof MongoError) {
-        console.error('MongoDB error:', error.message);
-        throw new Error('Failed to create user in the database.');
+      if (error.code === 11000 && error.keyPattern.email) {
+        throw new Error('Email already exists.');
+      }
+      if (error.code === 11000 && error.keyPattern.username) {
+        throw new Error('Username already exists.');
       }
 
       console.error('Error creating user:', error);
-      throw new Error('Internal server error');
-    } finally {
-      client.close();
+      throw new Error('Failed to create user in the database.');
     }
   }
+
 }
+

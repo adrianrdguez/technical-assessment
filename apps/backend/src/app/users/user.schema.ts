@@ -14,7 +14,7 @@ interface Course {
 
 @Schema()
 export class User {
-  @Prop({ default: uuidv4() })
+  @Prop({ default: uuidv4 })
   _id: string;
 
   @Prop({ required: true })
