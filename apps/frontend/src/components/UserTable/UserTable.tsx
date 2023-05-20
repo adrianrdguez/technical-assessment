@@ -1,51 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useTable } from 'react-table';
-import axios from 'axios';
 import { CustomThead, ContainerDiv, CustomTable, Td, Th, PaginationContainer, PaginationButton } from './UsersTable.styles';
 import { ReactComponent as InfoIcon } from '../../assets/info.svg'
-
-interface TableData {
-  name: string;
-  lastName: string;
-  isOnline: boolean;
-  email: string;
-  phone: string;
-  username: string;
-  icon: string;
-  fullName: string;
-}
-
+import { fetchUsers } from '../../services/Users/users.service';
+import { User } from '../../services/Users/users.models';
 
 interface CustomColumn {
   Header: string;
-  accessor: keyof TableData;
+  accessor: keyof User;
 }
 
 interface UsersTableProps {
-  onInfoClick: (rowData: TableData) => void;
+  onInfoClick: (rowData: User) => void;
 }
 
 const UsersTable: React.FC<UsersTableProps> = ({ onInfoClick }) => {
-  const [data, setData] = useState<TableData[]>([]);
+  const [data, setData] = useState<User[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
-    fetchUsers(currentPage);
+    fetchUsers(currentPage)
+      .then(updatedData => setData(updatedData))
+      .catch(error => console.log('Error fetching users:', error));
   }, [currentPage]);
-
-  const fetchUsers = async (page: number) => {
-    try {
-      const response = await axios.get<TableData[]>(`http://localhost:3333/api/users?page=${page}&limit=10`);
-      const updatedData = response.data.map((user) => ({
-        ...user,
-        fullName: `${user.name} ${user.lastName}`,
-      }));
-      setData(updatedData);
-    } catch (error) {
-      console.log('Error fetching users:', error);
-    }
-  };
-
 
   const columns: CustomColumn[] = React.useMemo(
     () => [
@@ -89,7 +66,7 @@ const UsersTable: React.FC<UsersTableProps> = ({ onInfoClick }) => {
         <tbody {...getTableBodyProps()}>
           {rows.map((row) => {
             prepareRow(row);
-            const rowData = row.original as TableData;
+            const rowData = row.original as User;
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => (

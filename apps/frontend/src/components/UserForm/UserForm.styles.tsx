@@ -42,3 +42,7 @@ export const FormGroup = styled.div<FormGroupProps>`
     props.width ? css`width: ${props.width}%;` : css`width: 100%;`
   )}
 `;
+
+export const StyleErrorMsg = styled(ErrorMessage)`
+  color: red;
+`;

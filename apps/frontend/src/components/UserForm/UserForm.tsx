@@ -1,7 +1,8 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import { FormContainer, FormGroup, Label, Input, ErrorMsg, DoubleRow } from './UserForm.styles';
-
+import { FormContainer, FormGroup, Label, Input, DoubleRow, StyleErrorMsg } from './UserForm.styles';
+import { validationSchema } from '../../validations/validationSchema';
+import SaveButton from '../Buttons/SaveButton/SaveButton';
 
 interface UserFormProps {
   initialValues: {
@@ -15,64 +16,47 @@ interface UserFormProps {
 }
 
 const EditUserForm: React.FC<UserFormProps> = ({ initialValues, onSubmit }) => {
-  /* const validateForm = (values: any) => {
-    const errors: any = {};
-
-    if (!values.name) {
-      errors.name = 'Required';
-    }
-
-    if (!values.username) {
-      errors.username = 'Required';
-    }
-
-    if (!values.email) {
-      errors.email = 'Required';
-    }
-
-    if (!values.phone) {
-      errors.phone = 'Required';
-    }
-
-    return errors;
-  }; */
-
   return (
-    <Formik initialValues={initialValues} /* validate={validateForm} */ onSubmit={onSubmit}>
+    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
       <Form>
         <FormContainer>
           <DoubleRow>
             <FormGroup width={40}>
               <Label htmlFor="name">Nombre</Label>
               <Input type="text" id="name" name="name" />
-              <ErrorMsg name="name" component="div" />
+              <StyleErrorMsg name="name" component="p" />
             </FormGroup>
 
             <FormGroup width={40}>
               <Label htmlFor="lastName">Apellidos</Label>
               <Input type="text" id="lastName" name="lastName" />
-              <ErrorMsg name="lastName" component="div" />
+              <StyleErrorMsg name="lastName" component="p" />
             </FormGroup>
           </DoubleRow>
 
           <FormGroup>
             <Label htmlFor="username">Nombre de Usuario</Label>
             <Input type="text" id="username" name="username" />
-            <ErrorMsg name="username" component="div" />
+            <StyleErrorMsg name="username" component="p" />
           </FormGroup>
 
           <FormGroup>
             <Label htmlFor="email">Email</Label>
             <Input type="email" id="email" name="email" />
-            <ErrorMsg name="email" component="div" />
+            <StyleErrorMsg name="email" component="p" />
           </FormGroup>
 
           <FormGroup width={40}>
             <Label htmlFor="phone">Móvil</Label>
             <Input type="text" id="phone" name="phone" />
-            <ErrorMsg name="phone" component="div" />
+            <StyleErrorMsg name="phone" component="p" />
           </ FormGroup>
         </FormContainer>
+        <button
+          type="submit"
+        >
+          Submit
+        </button>
       </Form>
     </Formik>
   );
