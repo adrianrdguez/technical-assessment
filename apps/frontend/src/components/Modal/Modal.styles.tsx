@@ -29,3 +29,10 @@ padding: 20px 35px;
   min-height: 611px;
 }
 `;
+
+export const ButtonsContainer = styled.div`
+display: flex;
+position: absolute;
+right: 20px;
+top: 20px;
+`;

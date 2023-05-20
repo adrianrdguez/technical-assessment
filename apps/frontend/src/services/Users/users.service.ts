@@ -27,7 +27,18 @@ const createUser = async (user: User): Promise<User> => {
   }
 };
 
+const updateUser = async (id: string, updatedData: Partial<User>): Promise<User> => {
+  try {
+    const response = await axios.put<User>(`${API_URL}/${id}`, updatedData);
+    return response.data;
+  } catch (error) {
+    console.log('Error updating user:', error);
+    throw error;
+  }
+};
+
 export {
   fetchUsers,
-  createUser
+  createUser,
+  updateUser
 };

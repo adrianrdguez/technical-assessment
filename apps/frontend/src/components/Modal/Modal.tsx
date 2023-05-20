@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ModalContent, ModalOverlay } from './Modal.styles';
+import { ModalContent, ModalOverlay, ButtonsContainer } from './Modal.styles';
 import UserProfile from '../UserProfile/UserProfile';
 import UserProfileTabs from '../UserProfileTabs/UserProfileTabs';
 import UserProfileTab from '../UserProfileTabs/UserProfileTab';
@@ -10,7 +10,7 @@ import { EditButtonContainer } from '../Buttons/CloseButton/CloseButton.styles';
 import UserForm from '../UserForm/UserForm';
 import SaveButton from '../Buttons/SaveButton/SaveButton';
 import CancelButton from '../Buttons/CancelButton/CancelButton';
-import { createUser } from '../../services/Users/users.service';
+import { createUser, updateUser } from '../../services/Users/users.service';
 import { User } from '../../services/Users/users.models'
 
 interface ModalProps {
@@ -60,20 +60,28 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, user, isButtonClicked })
 
   const handleFormSubmitEditUser = async (formData: User) => {
     try {
-      console.log(formData);
-      console.log(user._id);
+      const updatedUser = { ...userProfileProps, ...formData };
+      const response = await updateUser(userProfileProps._id, updatedUser);
+      console.log('Updated User:', response);
     } catch (error) {
       console.log('Error updating user:', error);
     }
   };
 
+
   return (
     <ModalOverlay>
       <ModalContent>
         {isButtonClicked ? (
-          <>
-            <UserForm onSubmit={handleFormSubmitCreateUser} initialValues={blankInitialValues} />
-          </>
+          <UserForm
+            onSubmit={handleFormSubmitCreateUser}
+            initialValues={blankInitialValues}
+            renderButtons={({ handleSubmit }) => (
+              <ButtonsContainer>
+                <SaveButton onClick={handleSubmit} />
+              </ButtonsContainer>
+            )}
+          />
         ) :
           <UserProfileTabs defaultTab="Perfil">
             <UserProfileTab label="Perfil">
@@ -82,13 +90,20 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, user, isButtonClicked })
                   <EditButton onClick={handleEditClick} />
                 ) : (
                   <>
-                    <CancelButton onClick={handleEditClick} />
-                    <SaveButton onClick={() => handleFormSubmitEditUser(userProfileProps)} />
                   </>
                 )}
               </EditButtonContainer>
               {isEditing ? (
-                <UserForm onSubmit={handleFormSubmitEditUser} initialValues={userProfileProps} />
+                <UserForm
+                  onSubmit={handleFormSubmitEditUser}
+                  initialValues={userProfileProps}
+                  renderButtons={({ handleSubmit }) => (
+                    <ButtonsContainer>
+                      <CancelButton onClick={handleEditClick} />
+                      <SaveButton onClick={handleSubmit} />
+                    </ButtonsContainer>
+                  )}
+                />
               ) : (
                 <UserProfile {...userProfileProps} />
               )}
