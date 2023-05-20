@@ -10,12 +10,25 @@ usar los datos del JSON como una base de datos mockeada, este JSON esta situado 
 Proporcionamos en este repositorio un boilerplate con un stack similar al utilizado en Ucademy, NestJS para el backend y React para
 el frontend.
 
+Para comenzar con la prueba técnica, sigue los pasos a continuación:
+
+1. Clona el repositorio:
 `git clone git@github.com:Jeff909Dev/technical-assessment.git`
 
+
+2. Instala las dependencias:
 `npm install`
 
+
+3. Crea el contenedor de Docker con MongoDB y carga la configuración inicial:
+    - Este comando creará un contenedor de Docker con MongoDB y cargará los datos del archivo `DB.json` en la base de datos.
+`npm run docker`
+
+4. Inicia el backend:
 `npm run start:backend`
 
+
+5. Inicia el frontend:
 `npm run start:fronted`
 
 ## Enlaces:
@@ -31,3 +44,4 @@ PD: El objetivo de la prueba es simplemente valorar las desiciones que toma el c
 
 Happy hacking! 
 :D
+
