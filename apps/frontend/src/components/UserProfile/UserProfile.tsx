@@ -1,4 +1,5 @@
 import { ContainerDiv, Icon, ContentDiv, Header, Text, ImageDivContainer } from './UserProfile.styles';
+import { format } from 'date-fns';
 
 interface UserProps {
   avatar?: string;
@@ -58,7 +59,7 @@ const UserProfile: React.FC<UserProps> = (props) => (
       </Icon>
       <ContentDiv>
         <Header>Fecha de Inscripción</Header>
-        <Text>{props.inscriptionDate}</Text>
+        <Text>{format(new Date(props.inscriptionDate), 'dd/MM/yyyy')}</Text>
       </ContentDiv>
     </ContainerDiv>
   </div>
