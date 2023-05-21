@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
 export const CustomThead = styled.thead`
-  border-bottom: 1px solid #CDCDCD
+ tr {
+    th {
+      border-bottom: 2px solid black;
+    }
+  }
 `;
 
 export const ContainerDiv = styled.div`
@@ -15,10 +19,12 @@ export const CustomTable = styled.table`
 
 export const Th = styled.th`
   padding: 10px;
+  text-align: left;
 `;
 
 export const Td = styled.th`
   padding: 15px 10px;
+  text-align: left;
 `;
 
 export const PaginationContainer = styled.div`

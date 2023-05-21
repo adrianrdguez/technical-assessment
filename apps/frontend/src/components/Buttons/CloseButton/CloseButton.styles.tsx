@@ -5,18 +5,15 @@ export const ButtonContainer = styled.button`
   position: 'absolute',
   bottom: '10px', 
   right: '10px',
-  background-color: #007bff;
-  color: #fff;
-  border: none;
+  background-color: #FFF;
+  color: #262D34;
+  border: 1px solid #262D34;
   border-radius: 4px;
   font-size: 14px;
   cursor: pointer;
   position: absolute;
   bottom: 10px;
   right: 10px;
-  &:hover {
-    background-color: #0056b3;
-  }
 `;
 
 export const EditButtonContainer = styled.div`
