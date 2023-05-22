@@ -35,4 +35,7 @@ display: flex;
 position: absolute;
 right: 20px;
 top: 20px;
+@media (max-width:${deviceSizes.tablet}) { 
+  margin-right: 20px;
+}
 `;

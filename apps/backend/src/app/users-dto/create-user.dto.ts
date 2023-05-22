@@ -32,5 +32,5 @@ export class CreateNewUserDto {
   phone: string;
 
   @IsDate()
-  inscriptionDate: Date;
+  inscriptionDate: string;
 }

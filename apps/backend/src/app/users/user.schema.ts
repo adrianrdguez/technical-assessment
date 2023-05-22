@@ -54,4 +54,5 @@ export class User {
   courses: Course[];
 }
 
+
 export const UserSchema = SchemaFactory.createForClass(User);
