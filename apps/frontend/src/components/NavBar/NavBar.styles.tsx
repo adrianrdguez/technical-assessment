@@ -3,9 +3,9 @@ import { deviceSizes } from '../../styles/constants';
 
 export const StyledNavBar = styled.nav`
   background: #262d34;
-  display: flex;
-  align-items: center;
   padding: 20px;
+  display: flex;
+    justify-content: space-between;
   @media (min-width: ${deviceSizes.tablet}) {
     padding: 40px;
   }
@@ -23,6 +23,13 @@ export const StyledLogo = styled.img`
   @media (max-width: ${deviceSizes.mobileL}) {
     max-width: 210px;
   }
+`;
+
+export const StyledButton = styled.button`
+color: white;
+background-color: #262d34;
+border: none;
+font-size: 24px;
 `;
 
 

@@ -1,11 +1,27 @@
 import logo from '../../assets/logo-ucademy.svg';
-import { StyledLogo, StyledNavBar } from './NavBar.styles';
+import { StyledLogo, StyledNavBar, StyledButton } from './NavBar.styles';
+import { FaBars, FaTimes } from 'react-icons/fa';
+
+interface NavbarProps {
+  isMobile: boolean;
+  sidebarOpen: boolean;
+  toggleSidebar: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ isMobile, sidebarOpen, toggleSidebar }) => {
+  return (
+    <StyledNavBar>
+      <StyledLogo src={logo} alt='logo-ucademy' />
+      {isMobile && (
+        <StyledButton onClick={toggleSidebar}>
+          {sidebarOpen ? <FaTimes /> : <FaBars />}
+        </StyledButton>)}
+    </StyledNavBar>
+  );
+};
+
+export default Navbar;
 
 
-const NavBar = () => (
-  <StyledNavBar>
-    <StyledLogo src={logo} alt='logo-ucademy' />
-  </StyledNavBar>
-);
 
-export default NavBar;
+import React from 'react';
