@@ -29,12 +29,9 @@ export function App() {
   return (
     <div>
       <Navbar isMobile={isMobile} sidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-      {isMobile ? (
+      <Sidebar isHidden={isMobile && !isSidebarOpen} items={SIDE_CONSTANTS}>
         <AppRouter />
-      ) :
-        <Sidebar items={SIDE_CONSTANTS}>
-          <AppRouter />
-        </Sidebar>}
+      </Sidebar>
     </div>
   );
 }

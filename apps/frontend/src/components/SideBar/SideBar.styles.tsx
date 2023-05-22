@@ -1,5 +1,9 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { deviceSizes } from "../../styles/constants";
+
+interface SideBarProps {
+  isHidden: boolean;
+}
 
 export const CustomLi = styled.li`
   display: flex;
@@ -11,13 +15,27 @@ export const CustomImg = styled.img`
   margin: 20px;
 `;
 
-export const CustomDiv = styled.div`
+export const CustomDiv = styled.div<SideBarProps>`
   position: fixed;
   padding: 20px;
   @media (min-width:${deviceSizes.laptop}) {
     position: relative;
     padding-top: 35px;
     padding: 20px;
+  }
+  @media (max-width:${deviceSizes.tablet}) {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #262D34;
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 10px;
+    ${props =>
+    props.isHidden &&
+    css`
+        display: none;
+      `}
   }
 `;
 
@@ -38,3 +56,5 @@ export const TableContent = styled.div`
     width: 100%;
   }
 `;
+
+

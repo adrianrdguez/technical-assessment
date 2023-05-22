@@ -6,13 +6,14 @@ interface SidebarProps {
   items: {
     logo: string;
     text: string;
-  }[]
+  }[];
+  isHidden: boolean;
 }
 
-const Sidebar = ({ children, items }: SidebarProps) => {
+const Sidebar = ({ children, items, isHidden }: SidebarProps) => {
   return (
     <DivContainer>
-      <CustomDiv>
+      <CustomDiv isHidden={isHidden}>
         <ul>
           {items.map(({ logo, text }) =>
             <CustomLi key={text}>
@@ -30,4 +31,5 @@ const Sidebar = ({ children, items }: SidebarProps) => {
 };
 
 export default Sidebar;
+
 
