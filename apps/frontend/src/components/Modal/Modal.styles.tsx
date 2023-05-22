@@ -15,7 +15,6 @@ export const ModalOverlay = styled.div`
 
 export const ModalContent = styled.div`
 position: fixed;
-height: 80vh;
 width: 100%;
 height: 50%;
 max-width: 480px;
@@ -24,9 +23,10 @@ box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.1);
 border-radius: 5px;
 overflow: auto;
 padding: 20px 35px;
-@media min-width:${deviceSizes.tablet} { 
-  position: relative;
+@media (max-width:${deviceSizes.tablet}) { 
   min-height: 611px;
+  bottom: 0;
+  height: 80vh;
 }
 `;
 

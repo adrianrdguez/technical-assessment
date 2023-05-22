@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { deviceSizes } from '../../styles/constants';
 
 export const UserProfileTabsContainer = styled.div`
   display: flex;
@@ -34,4 +35,10 @@ background-color: #262D34;
         &:hover {
           background-color: #3f4a56;
         }
+`
+
+export const TabContainer = styled.div`
+@media (max-width:${deviceSizes.tablet}) { 
+  margin-left: 20px;
+}
 `

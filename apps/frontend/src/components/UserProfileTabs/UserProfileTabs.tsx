@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UserProfileTabsContainer, UserProfileTabButton, EditTabButton } from './UserProfileTabs.styles';
+import { UserProfileTabsContainer, UserProfileTabButton, TabContainer } from './UserProfileTabs.styles';
 
 interface TabProps {
   label: string;
@@ -23,7 +23,7 @@ const UserProfileTabs = ({ defaultTab, children }: { defaultTab: string; childre
           return null;
         })}
       </div>
-      <div>
+      <TabContainer>
         {React.Children.map(children, (child: React.ReactElement<TabProps>) => (
           <UserProfileTabButton
             key={child.props.label}
@@ -34,7 +34,7 @@ const UserProfileTabs = ({ defaultTab, children }: { defaultTab: string; childre
             {child.props.label}
           </UserProfileTabButton>
         ))}
-      </div>
+      </TabContainer>
     </UserProfileTabsContainer>
   );
 };

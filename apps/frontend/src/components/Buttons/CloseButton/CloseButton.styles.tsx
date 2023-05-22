@@ -1,3 +1,4 @@
+import { deviceSizes } from 'apps/frontend/src/styles/constants';
 import styled from 'styled-components';
 
 export const ButtonContainer = styled.button`
@@ -14,6 +15,9 @@ export const ButtonContainer = styled.button`
   position: absolute;
   bottom: 10px;
   right: 10px;
+  @media (max-width:${deviceSizes.tablet}) { 
+    margin-right: 50px;
+  }
 `;
 
 export const EditButtonContainer = styled.div`

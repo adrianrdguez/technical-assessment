@@ -1,24 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
+import { EditStyledButton } from '../Button.styles';
 
 interface EditButtonProps {
   onClick: () => void;
 }
 
-const StyledButton = styled.button`
-  background-color: #262D34;
-  color: #fff;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-`;
 
 const EditButton: React.FC<EditButtonProps> = ({ onClick }) => {
   return (
-    <StyledButton onClick={onClick}>
+    <EditStyledButton onClick={onClick}>
       Editar Estudiante
-    </StyledButton>
+    </EditStyledButton>
   );
 };
 
