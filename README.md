@@ -31,6 +31,16 @@ Para comenzar con la prueba técnica, sigue los pasos a continuación:
 5. Inicia el frontend:
 `npm run start:fronted`
 
+## Ejecución de pruebas
+
+Opcionalmente, puedes ejecutar pruebas tanto en el backend como en el frontend utilizando los siguientes comandos:
+
+- Para ejecutar las pruebas del frontend:
+`npm run frontend:tests`
+
+
+- Para ejecutar las pruebas del backend:
+`npm run backend:tests`
 ## Enlaces:
 
 [Interfaz de usuario](https://www.figma.com/file/n7HkjhcVD6dZISm9fu5FNG/Prueba-T%C3%A9cnica?node-id=0%3A1)
