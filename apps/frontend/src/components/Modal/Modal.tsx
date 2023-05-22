@@ -25,6 +25,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, user, isButtonClicked })
 
   const [isEditing, setIsEditing] = useState(false);
 
+
   const userProfileProps = user && {
     _id: user._id,
     avatar: user.avatar,
@@ -52,6 +53,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, user, isButtonClicked })
   const handleFormSubmitCreateUser = async (formData: User) => {
     try {
       const response = await createUser(formData);
+      onClose();
       console.log('User created:', response);
     } catch (error) {
       console.log('Error creating user:', error);
@@ -62,6 +64,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, user, isButtonClicked })
     try {
       const updatedUser = { ...userProfileProps, ...formData };
       const response = await updateUser(userProfileProps._id, updatedUser);
+      handleEditClick();
       console.log('Updated User:', response);
     } catch (error) {
       console.log('Error updating user:', error);

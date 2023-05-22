@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface ConexionProp {
+  isOnline: boolean;
+}
+
 export const CustomThead = styled.thead`
  tr {
     th {
@@ -48,4 +52,18 @@ export const PaginationButton = styled.button`
     background-color: #cccccc;
     cursor: not-allowed;
   }
+`;
+
+export const ConexionTd = styled.div<ConexionProp>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 18px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 300px;
+  font-family: 'Poppins', sans-serif;
+  background: ${(props) => (props.isOnline ? '#0ABB87' : '#ffffff')};
+  border: ${(props) => (props.isOnline ? 'none' : '0.5px solid #9e9e9e')};
 `;

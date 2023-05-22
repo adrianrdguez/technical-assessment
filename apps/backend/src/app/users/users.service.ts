@@ -5,6 +5,7 @@ import { MongoClient, MongoError } from 'mongodb';
 import { PageOptionsDto } from '../users-dto/page-options.dto';
 import { CreateNewUserDto } from '../users-dto/create-user.dto';
 import { User } from './user.schema';
+import { format } from 'date-fns';
 
 @Injectable()
 export class UsersService {
@@ -29,7 +30,6 @@ export class UsersService {
         .find()
         .skip(Number(page))
         .limit(Number(limit))
-        .sort({ inscriptionDate: -1 })
         .toArray();
 
       return users;
@@ -51,7 +51,7 @@ export class UsersService {
       const createdUser = new this.userModel({
         ...createUserDto,
         isOnline: false,
-        inscriptionDate: new Date().toISOString(),
+        inscriptionDate: format(new Date(), 'dd/MM/yyyy'),
         avatar: 'https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/26/2621da26f5c7e9163a60f0a9d1129f5e53984663.jpg',
         courses: [],
       });

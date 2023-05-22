@@ -59,7 +59,7 @@ const UserProfile: React.FC<UserProps> = (props) => (
       </Icon>
       <ContentDiv>
         <Header>Fecha de Inscripción</Header>
-        <Text>{format(new Date(props.inscriptionDate), 'dd/MM/yyyy')}</Text>
+        <Text>{props.inscriptionDate}</Text>
       </ContentDiv>
     </ContainerDiv>
   </div>

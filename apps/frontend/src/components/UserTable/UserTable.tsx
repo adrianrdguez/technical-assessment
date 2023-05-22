@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTable } from 'react-table';
-import { CustomThead, ContainerDiv, CustomTable, Td, Th, PaginationContainer, PaginationButton } from './UsersTable.styles';
+import { CustomThead, ContainerDiv, CustomTable, Td, Th, PaginationContainer, PaginationButton, ConexionTd } from './UsersTable.styles';
 import { ReactComponent as InfoIcon } from '../../assets/info.svg'
 import { fetchUsers } from '../../services/Users/users.service';
 import { User } from '../../services/Users/users.models';
@@ -69,9 +69,16 @@ const UsersTable: React.FC<UsersTableProps> = ({ onInfoClick }) => {
             const rowData = row.original as User;
             return (
               <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => (
-                  <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
-                ))}
+                {row.cells.map((cell) => {
+                  if (cell.column.id === 'isOnline') {
+                    return (
+                      <ConexionTd isOnline={cell.value} {...cell.getCellProps()}>{cell.value ? 'Online' : 'Offline'}</ConexionTd>
+                    );
+                  }
+                  return (
+                    <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
+                  );
+                })}
                 <Td>
                   <InfoIcon style={{ cursor: 'pointer' }} onClick={() => onInfoClick(rowData)} />
                 </Td>

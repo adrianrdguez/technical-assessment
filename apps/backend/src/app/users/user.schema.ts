@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { v4 as uuidv4 } from 'uuid';
 import { Document } from 'mongoose';
+import { format } from 'date-fns';
 
 export type UserDocument = User & Document;
 
@@ -39,7 +40,7 @@ export class User {
   phone: string;
 
   @Prop({ required: true })
-  inscriptionDate: Date;
+  inscriptionDate: string;
 
   @Prop([
     {
@@ -47,7 +48,7 @@ export class User {
       title: { type: String },
       description: { type: String },
       percentCompleted: { type: Number },
-      inscriptionDate: { type: Date, default: Date.now },
+      inscriptionDate: { type: String, default: format(new Date(), 'dd/MM/yyyy') },
     },
   ])
   courses: Course[];
