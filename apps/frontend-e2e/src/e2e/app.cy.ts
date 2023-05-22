@@ -1,15 +1,10 @@
+import { testUser } from "./seeders/shouldCreateNewUser";
+import { testEditUser } from "./seeders/shouldEditCreatedUser";
+
 const API_URL = 'http://localhost:3333';
 
 
 describe('Users', () => {
-  const testUser = {
-    username: 'Johnny',
-    name: 'John',
-    lastName: 'Doe',
-    email: 'john@email.com',
-    phone: '+34632143567',
-  };
-
   beforeEach(() => {
     cy.intercept('GET', `${API_URL}/api/users?page=0&limit=10`, {
       fixture: 'example.json',
@@ -47,11 +42,10 @@ describe('Users', () => {
     cy.get('[data-cy=userForm-email]').type(testUser.email);
     cy.get('[data-cy=userForm-phone]').type(testUser.phone);
     cy.get('[data-cy=userForm-save]').click();
-    cy.wait(['@createUserRequest', '@users'])
-      .then(([xhrObject]) => {
+    cy.wait('@createUserRequest')
+      .then(xhrObject => {
         const requestBody = xhrObject.request.body;
         expect(requestBody).to.be.eql(testUser);
-        debugger;
       });
   });
 
@@ -61,16 +55,16 @@ describe('Users', () => {
     }).as('editUserRequest');
     cy.get('[data-cy=usersTable-row]').eq(5).find('[data-cy=info-button]').click();
     cy.get('[data-cy=userProfile-edit]').click();
-    cy.get('[data-cy=userForm-name]').clear().type(testUser.name);
-    cy.get('[data-cy=userForm-lastName]').clear().type(testUser.lastName);
-    cy.get('[data-cy=userForm-username]').clear().type(testUser.username);
-    cy.get('[data-cy=userForm-email]').clear().type(testUser.email);
-    cy.get('[data-cy=userForm-phone]').clear().type(testUser.phone);
+    cy.get('[data-cy=userForm-name]').clear().type(testEditUser.name);
+    cy.get('[data-cy=userForm-lastName]').clear().type(testEditUser.lastName);
+    cy.get('[data-cy=userForm-username]').clear().type(testEditUser.username);
+    cy.get('[data-cy=userForm-email]').clear().type(testEditUser.email);
+    cy.get('[data-cy=userForm-phone]').clear().type(testEditUser.phone);
     cy.get('[data-cy2=userProfile-save]').click();
     cy.wait('@editUserRequest')
       .then(xhrObject => {
         const requestBody = xhrObject.request.body;
-        expect(requestBody).to.be.eql(testUser);
+        expect(requestBody).to.be.eql(testEditUser);
       });
   });
 });

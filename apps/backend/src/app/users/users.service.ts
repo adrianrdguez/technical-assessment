@@ -57,6 +57,7 @@ export class UsersService {
       });
 
       const savedUser = await createdUser.save();
+      console.log(savedUser)
       return savedUser;
     } catch (error) {
       if (error.code === 11000 && error.keyPattern.email) {
