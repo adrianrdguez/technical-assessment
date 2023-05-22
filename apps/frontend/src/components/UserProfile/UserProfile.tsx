@@ -1,5 +1,4 @@
 import { ContainerDiv, Icon, ContentDiv, Header, Text, ImageDivContainer } from './UserProfile.styles';
-import { format } from 'date-fns';
 
 interface UserProps {
   avatar?: string;

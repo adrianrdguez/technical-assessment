@@ -21,32 +21,32 @@ const EditUserForm: React.FC<UserFormProps> = ({ initialValues, onSubmit, render
               <DoubleRow>
                 <FormGroup width={40}>
                   <Label htmlFor="name">Nombre</Label>
-                  <Input type="text" id="name" name="name" />
+                  <Input type="text" id="name" name="name" data-cy="userForm-name" />
                   <StyleErrorMsg name="name" component="p" />
                 </FormGroup>
 
                 <FormGroup width={40}>
                   <Label htmlFor="lastName">Apellidos</Label>
-                  <Input type="text" id="lastName" name="lastName" />
+                  <Input type="text" id="lastName" name="lastName" data-cy="userForm-lastName" />
                   <StyleErrorMsg name="lastName" component="p" />
                 </FormGroup>
               </DoubleRow>
 
               <FormGroup>
                 <Label htmlFor="username">Nombre de Usuario</Label>
-                <Input type="text" id="username" name="username" />
+                <Input type="text" id="username" name="username" data-cy="userForm-username" />
                 <StyleErrorMsg name="username" component="p" />
               </FormGroup>
 
               <FormGroup>
                 <Label htmlFor="email">Email</Label>
-                <Input type="email" id="email" name="email" />
+                <Input type="email" id="email" name="email" data-cy="userForm-email" />
                 <StyleErrorMsg name="email" component="p" />
               </FormGroup>
 
               <FormGroup width={40}>
                 <Label htmlFor="phone">Móvil</Label>
-                <Input type="text" id="phone" name="phone" />
+                <Input type="text" id="phone" name="phone" data-cy="userForm-phone" />
                 <StyleErrorMsg name="phone" component="p" />
               </ FormGroup>
             </FormContainer>

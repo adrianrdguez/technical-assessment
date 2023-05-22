@@ -30,7 +30,7 @@ const Users = () => {
 
   return (
     <>
-      <Button onClick={openModalWithButton}>Nuevo Estudiante</Button>
+      <Button dataCypress="create-user" onClick={openModalWithButton}>Nuevo Estudiante</Button>
       <UsersTable onInfoClick={handleInfoClick} />
       <Modal user={selectedUser} isOpen={isModalOpen} onClose={closeModal} isButtonClicked={isButtonClicked} />
     </>

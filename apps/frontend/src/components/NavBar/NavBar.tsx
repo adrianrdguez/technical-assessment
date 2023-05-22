@@ -11,7 +11,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ isMobile, sidebarOpen, toggleSidebar }) => {
   return (
     <StyledNavBar>
-      <StyledLogo src={logo} alt='logo-ucademy' />
+      <StyledLogo src={logo} alt='logo-ucademy' data-cy="ucademy-logo" />
       {isMobile && (
         <StyledButton onClick={toggleSidebar}>
           {sidebarOpen ? <FaTimes /> : <FaBars />}

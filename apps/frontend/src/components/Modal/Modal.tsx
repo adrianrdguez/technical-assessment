@@ -81,7 +81,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, user, isButtonClicked })
             initialValues={blankInitialValues}
             renderButtons={({ handleSubmit }) => (
               <ButtonsContainer>
-                <SaveButton onClick={handleSubmit} />
+                <SaveButton dataCypress="userForm-save" onClick={handleSubmit} />
               </ButtonsContainer>
             )}
           />
@@ -90,7 +90,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, user, isButtonClicked })
             <UserProfileTab label="Perfil">
               <EditButtonContainer>
                 {!isEditing ? (
-                  <EditButton onClick={handleEditClick} />
+                  <EditButton dataCypress="userProfile-edit" onClick={handleEditClick} />
                 ) : (
                   <>
                   </>
@@ -103,7 +103,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, user, isButtonClicked })
                   renderButtons={({ handleSubmit }) => (
                     <ButtonsContainer>
                       <CancelButton onClick={handleEditClick} />
-                      <SaveButton onClick={handleSubmit} />
+                      <SaveButton dataCypress2="userProfile-save" onClick={handleSubmit} />
                     </ButtonsContainer>
                   )}
                 />

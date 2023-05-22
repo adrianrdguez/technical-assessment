@@ -8,6 +8,7 @@
     "build": "nx build",
     "test": "nx test",
     "backend:test": "nx run backend:test",
+    "frontend:test": "nx e2e frontend-e2e --watch",
     "docker": "docker-compose up -d --force-recreate",
     "db:dump": "node tools/scripts/dump-database.ts"
   },

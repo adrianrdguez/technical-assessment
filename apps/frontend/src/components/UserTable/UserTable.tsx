@@ -53,7 +53,7 @@ const UsersTable: React.FC<UsersTableProps> = ({ onInfoClick }) => {
 
   return (
     <ContainerDiv>
-      <CustomTable {...getTableProps()}>
+      <CustomTable data-cy="users-table" {...getTableProps()}>
         <CustomThead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -68,7 +68,7 @@ const UsersTable: React.FC<UsersTableProps> = ({ onInfoClick }) => {
             prepareRow(row);
             const rowData = row.original as User;
             return (
-              <Tr {...row.getRowProps()}>
+              <Tr {...row.getRowProps()} data-cy="usersTable-row">
                 {row.cells.map((cell) => {
                   if (cell.column.id === 'isOnline') {
                     return (
@@ -82,7 +82,7 @@ const UsersTable: React.FC<UsersTableProps> = ({ onInfoClick }) => {
                   );
                 })}
                 <Td>
-                  <InfoIcon style={{ cursor: 'pointer' }} onClick={() => onInfoClick(rowData)} />
+                  <InfoIcon data-cy="info-button" style={{ cursor: 'pointer' }} onClick={() => onInfoClick(rowData)} />
                 </Td>
               </Tr>
             );
@@ -90,10 +90,10 @@ const UsersTable: React.FC<UsersTableProps> = ({ onInfoClick }) => {
         </tbody>
       </CustomTable>
       <PaginationContainer>
-        <PaginationButton disabled={currentPage === 0} onClick={handlePrevPage}>
+        <PaginationButton data-cy="table-prev-button" disabled={currentPage === 0} onClick={handlePrevPage}>
           Previous
         </PaginationButton>
-        <PaginationButton onClick={handleNextPage}>
+        <PaginationButton data-cy="table-next-button" onClick={handleNextPage}>
           Next
         </PaginationButton>
       </PaginationContainer>

@@ -46,6 +46,7 @@ export class UsersController {
       if (!updatedUser) {
         throw new HttpException('User not found.', HttpStatus.NOT_FOUND);
       }
+      console.log(updatedUser)
       return updatedUser;
     } catch (error) {
       console.error('Error updating user:', error);

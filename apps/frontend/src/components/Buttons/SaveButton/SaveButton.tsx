@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 interface SaveButtonProps {
   onClick: () => void;
+  dataCypress?: string;
+  dataCypress2?: string;
 }
 
 const StyledButton = styled.button`
@@ -14,9 +16,9 @@ const StyledButton = styled.button`
   cursor: pointer;
 `;
 
-const SaveButton: React.FC<SaveButtonProps> = ({ onClick }) => {
+const SaveButton: React.FC<SaveButtonProps> = ({ onClick, dataCypress, dataCypress2 }) => {
   return (
-    <StyledButton onClick={onClick}>
+    <StyledButton data-cy={dataCypress} data-cy2={dataCypress2} onClick={onClick}>
       Cuardar
     </StyledButton>
   );

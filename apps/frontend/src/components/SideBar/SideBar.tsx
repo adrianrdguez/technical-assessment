@@ -12,7 +12,7 @@ interface SidebarProps {
 
 const Sidebar = ({ children, items, isHidden }: SidebarProps) => {
   return (
-    <DivContainer>
+    <DivContainer data-cy="sidebar-menu">
       <CustomDiv isHidden={isHidden}>
         <ul>
           {items.map(({ logo, text }) =>

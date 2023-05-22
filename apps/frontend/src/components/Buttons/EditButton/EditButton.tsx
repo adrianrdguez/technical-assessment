@@ -3,12 +3,13 @@ import { EditStyledButton } from '../Button.styles';
 
 interface EditButtonProps {
   onClick: () => void;
+  dataCypress?: string;
 }
 
 
-const EditButton: React.FC<EditButtonProps> = ({ onClick }) => {
+const EditButton: React.FC<EditButtonProps> = ({ onClick, dataCypress }) => {
   return (
-    <EditStyledButton onClick={onClick}>
+    <EditStyledButton data-cy={dataCypress} onClick={onClick}>
       Editar Estudiante
     </EditStyledButton>
   );
