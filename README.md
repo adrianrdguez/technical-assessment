@@ -21,8 +21,9 @@ Para comenzar con la prueba técnica, sigue los pasos a continuación:
 
 
 3. Crea el contenedor de Docker con MongoDB y carga la configuración inicial:
-    - Este comando creará un contenedor de Docker con MongoDB y cargará los datos del archivo `DB.json` en la base de datos.
 `npm run docker`
+    
+- Este comando creará un contenedor de Docker con MongoDB y cargará los datos del archivo `DB.json` en la base de datos.
 
 4. Inicia el backend:
 `npm run start:backend`
