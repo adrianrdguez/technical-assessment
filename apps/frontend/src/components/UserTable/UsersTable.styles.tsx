@@ -5,11 +5,7 @@ interface ConexionProp {
 }
 
 export const CustomThead = styled.thead`
- tr {
-    th {
-      border-bottom: 2px solid black;
-    }
-  }
+  border-bottom: 2px solid black;
 `;
 
 export const ContainerDiv = styled.div`
@@ -19,6 +15,7 @@ width: 100%;
 
 export const CustomTable = styled.table`
   width: 100%;
+  border-collapse: collapse;
 `;
 
 export const Th = styled.th`
@@ -26,9 +23,13 @@ export const Th = styled.th`
   text-align: left;
 `;
 
-export const Td = styled.th`
+export const Td = styled.td`
   padding: 15px 10px;
   text-align: left;
+`;
+
+export const Tr = styled.tr`
+  border-bottom: 1px solid #CDCDCD;
 `;
 
 export const PaginationContainer = styled.div`
@@ -54,7 +55,7 @@ export const PaginationButton = styled.button`
   }
 `;
 
-export const ConexionTd = styled.div<ConexionProp>`
+export const ConexionTd = styled.td<ConexionProp>`
   display: flex;
   align-items: center;
   justify-content: center;
