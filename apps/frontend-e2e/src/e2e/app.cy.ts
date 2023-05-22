@@ -1,13 +1,70 @@
-import { getGreeting } from '../support/app.po';
+import { testUser } from "./seeders/shouldCreateNewUser";
+import { testEditUser } from "./seeders/shouldEditCreatedUser";
 
-describe('frontend', () => {
-  beforeEach(() => cy.visit('/'));
+const API_URL = 'http://localhost:3333';
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
 
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome frontend');
+describe('Users', () => {
+  beforeEach(() => {
+    cy.intercept('GET', `${API_URL}/api/users?page=0&limit=10`, {
+      fixture: 'example.json',
+    }).as('users');
+    cy.visit('/');
+    cy.wait('@users');
+  });
+
+  it('displays a list of users and navbar', () => {
+    cy.get('[data-cy=ucademy-logo]').should('be.visible');
+    cy.get('[data-cy=users-table]').should('be.visible');
+    cy.get('[data-cy=sidebar-menu]').should('be.visible');
+    cy.get('[data-cy=create-user]').should('be.visible');
+    cy.get('[data-cy=table-next-button]').should('be.visible');
+    cy.get('[data-cy=table-prev-button]').should('be.visible');
+    cy.get('tr').should('have.length.gt', 0);
+  });
+
+  it('should pass next page in the table', () => {
+    cy.intercept('GET', `${API_URL}/api/users?page=10&limit=10`, {
+      fixture: 'example2.json',
+    }).as('users2');
+    cy.get('[data-cy=table-next-button]').click();
+    cy.wait('@users2');
+  });
+
+  it('should create a new user', () => {
+    cy.intercept('POST', `${API_URL}/api/users`, {
+      body: { statusCode: 201 },
+    }).as('createUserRequest');
+    cy.get('[data-cy=create-user]').click();
+    cy.get('[data-cy=userForm-name]').type(testUser.name);
+    cy.get('[data-cy=userForm-lastName]').type(testUser.lastName);
+    cy.get('[data-cy=userForm-username]').type(testUser.username);
+    cy.get('[data-cy=userForm-email]').type(testUser.email);
+    cy.get('[data-cy=userForm-phone]').type(testUser.phone);
+    cy.get('[data-cy=userForm-save]').click();
+    cy.wait('@createUserRequest')
+      .then(xhrObject => {
+        const requestBody = xhrObject.request.body;
+        expect(requestBody).to.be.eql(testUser);
+      });
+  });
+
+  it('should edit a created user', () => {
+    cy.intercept('PUT', `${API_URL}/api/users/1d033f27-e8a5-4dfb-94df-7a2b6c599277`, {
+      body: { statusCode: 201 },
+    }).as('editUserRequest');
+    cy.get('[data-cy=usersTable-row]').eq(5).find('[data-cy=info-button]').click();
+    cy.get('[data-cy=userProfile-edit]').click();
+    cy.get('[data-cy=userForm-name]').clear().type(testEditUser.name);
+    cy.get('[data-cy=userForm-lastName]').clear().type(testEditUser.lastName);
+    cy.get('[data-cy=userForm-username]').clear().type(testEditUser.username);
+    cy.get('[data-cy=userForm-email]').clear().type(testEditUser.email);
+    cy.get('[data-cy=userForm-phone]').clear().type(testEditUser.phone);
+    cy.get('[data-cy2=userProfile-save]').click();
+    cy.wait('@editUserRequest')
+      .then(xhrObject => {
+        const requestBody = xhrObject.request.body;
+        expect(requestBody).to.be.eql(testEditUser);
+      });
   });
 });

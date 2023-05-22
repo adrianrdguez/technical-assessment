@@ -1,36 +1,41 @@
-import styled from 'styled-components';
-
-import { Route, Routes, Link } from 'react-router-dom';
-
-const Wrapper = styled.div`
-
-`;
+import { useState, useEffect } from 'react';
+import Navbar from '../components/NavBar/NavBar';
+import AppRouter from '../router';
+import Sidebar from '../components/SideBar/SideBar';
+import { SIDE_CONSTANTS } from '../styles/constants';
+import '../styles/index.css';
 
 export function App() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
-    <Wrapper>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div>
-              This is the generated root route.{' '}
-              <Link to="/page-2">Click here for page 2.</Link>
-            </div>
-          }
-        />
-        <Route
-          path="/page-2"
-          element={
-            <div>
-              <Link to="/">Click here to go back to root page.</Link>
-            </div>
-          }
-        />
-      </Routes>
-      {/* END: routes */}
-    </Wrapper>
+    <div>
+      <Navbar isMobile={isMobile} sidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+      <Sidebar isHidden={isMobile && !isSidebarOpen} items={SIDE_CONSTANTS}>
+        <AppRouter />
+      </Sidebar>
+    </div>
   );
 }
 
 export default App;
+
+
