@@ -10,6 +10,8 @@ usar los datos del JSON como una base de datos mockeada, este JSON esta situado 
 Proporcionamos en este repositorio un boilerplate con un stack similar al utilizado en Ucademy, NestJS para el backend y React para
 el frontend.
 
+Para avanzar la prueba técnica, necesitarás crear un archivo `.env` copiando el archivo `.env.example` proporcionado en el repositorio.
+
 Para comenzar con la prueba técnica, sigue los pasos a continuación:
 
 1. Clona el repositorio:
